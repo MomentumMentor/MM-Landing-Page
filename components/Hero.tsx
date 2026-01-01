@@ -1,69 +1,73 @@
 import { motion } from 'framer-motion'
-import { AuthButton } from './AuthButton'
-import { ChevronDown } from 'lucide-react'
+import { StarBackground } from './StarBackground'
 
 export function Hero() {
-  const scrollToNext = () => {
-    document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' })
+  const scrollToSignup = () => {
+    document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1e40af] via-[#1e3a8a] to-[#172554] text-white overflow-hidden pt-16">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('/kfwt_nhbnrc2kmqpymn_y.png')] bg-cover bg-center" />
-      </div>
+    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f1729] via-[#1a2744] to-[#0f1729] text-white overflow-hidden">
+      <StarBackground />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="bg-white/95 backdrop-blur-sm rounded-3xl border-4 border-[#F2B81C] p-8 sm:p-12 lg:p-16 shadow-[0_0_30px_rgba(242,184,28,0.4)] hover:shadow-[0_0_40px_rgba(242,184,28,0.6)] transition-all duration-300"
-        >
-          <div className="text-center">
-            <motion.img
-              src="/MMLOGO.png"
-              alt="Momentum Mentor"
-              className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 sm:mb-8"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="flex justify-center lg:justify-start"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#D4A017] opacity-40 blur-[120px] rounded-full" />
+              <div className="relative bg-white rounded-full p-8 sm:p-12 lg:p-16 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex items-center justify-center shadow-2xl">
+                <img
+                  src="/MMLOGO.png"
+                  alt="Momentum Mentor"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+          </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-balance text-[#0D1B3F]">
-              Stop Planning. Start Proving.
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-center lg:text-left"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span className="block text-white">ACCELERATE</span>
+              <span className="block text-[#D4A017] mt-2">YOUR FUTURE</span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 sm:mb-12 max-w-3xl mx-auto text-balance leading-relaxed">
-              Transform goals into momentum through integrated analytics and systematic progress
-              tracking
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Expert mentorship for professional growth.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <AuthButton variant="primary" />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={scrollToNext}
-                className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg border-2 border-[#0D1B3F]/30 text-[#0D1B3F] hover:border-[#0D1B3F] hover:bg-[#0D1B3F]/5 transition-all duration-300"
-                aria-label="Learn more about Momentum Mentor"
-              >
-                Learn More
-              </motion.button>
-            </div>
-          </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={scrollToSignup}
+              className="bg-[#D4A017] text-[#0f1729] px-8 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl hover:bg-[#F4B83C] transition-all duration-300 shadow-[0_0_30px_rgba(212,160,23,0.5)] hover:shadow-[0_0_50px_rgba(212,160,23,0.8)] uppercase tracking-wider"
+              aria-label="Get started with Momentum Mentor"
+            >
+              GET STARTED
+            </motion.button>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center"
+        >
+          <p className="text-white text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.3em] uppercase">
+            MOMENTUM MENTOR
+          </p>
         </motion.div>
       </div>
-
-      <motion.button
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer bg-white/10 backdrop-blur-sm rounded-full p-3 hover:bg-white/20 transition-colors"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        onClick={scrollToNext}
-        aria-label="Scroll to next section"
-      >
-        <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 text-white/70" />
-      </motion.button>
     </section>
   )
 }

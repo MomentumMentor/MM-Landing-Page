@@ -1,16 +1,15 @@
 'use client'
 
+import { BetaBanner } from '../components/BetaBanner'
 import { Navigation } from '../components/Navigation'
-import { ScrollProgress } from '../components/ScrollProgress'
 import { Hero } from '../components/Hero'
-import { ProblemStatement } from '../components/ProblemStatement'
-import { CPRFramework } from '../components/CPRFramework'
-import { ProductSuite } from '../components/ProductSuite'
+import { Features } from '../components/Features'
 import { HowItWorks } from '../components/HowItWorks'
-import { Benefits } from '../components/Benefits'
-import { FinalCTA } from '../components/FinalCTA'
+import { EmailSignup } from '../components/EmailSignup'
+import { FAQ } from '../components/FAQ'
 import { Footer } from '../components/Footer'
 import { useAuth } from '../hooks/useAuth'
+import { supabase } from '../lib/supabase'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -24,21 +23,38 @@ export default function Home() {
     }
   }, [user, loading, router])
 
+  const handleEmailSignup = async (email: string) => {
+    try {
+      const { error } = await supabase.from('beta_signups').insert([{ email }])
+
+      if (error) {
+        if (error.code === '23505') {
+          alert('This email is already registered for beta access!')
+        } else {
+          throw error
+        }
+      } else {
+        alert('Thank you for signing up! We will notify you when beta access is available.')
+      }
+    } catch (error) {
+      console.error('Error signing up:', error)
+      alert('There was an error signing up. Please try again.')
+    }
+  }
+
   return (
     <>
       <a href="#hero" className="skip-to-content">
         Skip to main content
       </a>
-      <ScrollProgress />
+      <BetaBanner />
       <main id="main-content" className="min-h-screen">
         <Navigation />
         <Hero />
-        <ProblemStatement />
-        <CPRFramework />
-        <ProductSuite />
+        <Features />
         <HowItWorks />
-        <Benefits />
-        <FinalCTA />
+        <EmailSignup onSubmit={handleEmailSignup} />
+        <FAQ />
         <Footer />
       </main>
     </>
