@@ -1,26 +1,41 @@
-import { ReactNode } from 'react'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Momentum Mentor - Accelerate Your Future',
+  description: 'Expert mentorship for professional growth. A structured goal-setting framework with AI-powered validation.',
+  openGraph: {
+    title: 'Momentum Mentor - Accelerate Your Future',
+    description: 'Expert mentorship for professional growth. A structured goal-setting framework with AI-powered validation.',
+    images: [
+      {
+        url: '/og-image.png',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Momentum Mentor - Accelerate Your Future',
+    description: 'Expert mentorship for professional growth.',
+    images: [
+      {
+        url: '/og-image.png',
+      },
+    ],
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <head>
-        <title>Momentum Mentor - Stop Planning. Start Proving.</title>
-        <meta name="description" content="Transform goals into momentum through integrated analytics and systematic progress tracking" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
+    <html lang="en">
       <body className={inter.className}>{children}</body>
     </html>
-  )
+  );
 }
